@@ -9,12 +9,12 @@ import lionsImage from "./../../assets/img/lions.jpg";
         class="hidden bg-cover lg:block lg:w-2/3"
         :style="{ backgroundImage: `url(${lionsImage})` }"
       >
-        <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
+        <div class="flex items-center h-full px-20 ">
           <div>
             <h2 class="text-7xl font-caesar bg-ocre-950  text-ocre-50">
               ZOOTOPIA
             </h2>
-            <p class="text-center text-2xl font-caesar max-w-xl mt-3 text-ocre-50 bg-ocre-950">
+            <p class="text-center text-3xl font-caesar max-w-xl mt-3 text-ocre-50 bg-ocre-950">
               NATURE RESERVE
             </p>
           </div>
@@ -23,7 +23,7 @@ import lionsImage from "./../../assets/img/lions.jpg";
       <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
         <div class="flex-1">
           <div class="text-center">
-            <h2 class="text-4xl font-poppins font-bold text-center text-white">
+            <h2 class="text-5xl font-poppins font-bold text-center text-white">
               Welcome to Zootopia
             </h2>
             <p class="mt-3 text-white">Sign in to access your account</p>
