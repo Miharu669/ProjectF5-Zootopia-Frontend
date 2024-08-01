@@ -58,7 +58,7 @@ import lionsImage from "./../../assets/img/lions.jpg";
               </div>
               <div class="mt-6">
                 <button
-                  class="bg-random-50 font-poppins w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform rounded-md hover:bg-verde-400 focus:outline-none focus:bg-verde-400 focus:ring focus:ring-verde-400 focus:ring-opacity-50"
+                  class="bg-verde-400 font-poppins w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform rounded-md hover:bg-random-50 focus:outline-none focus:bg-random-50 focus:ring focus:ring-random-50 focus:ring-opacity-50"
                 >
                   Sign in
                 </button>
