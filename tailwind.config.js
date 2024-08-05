@@ -76,6 +76,7 @@ export default {
         },
         random: {
           50: "#4c7974",
+          100: "#E7E5E6",
         },
       },
     },
