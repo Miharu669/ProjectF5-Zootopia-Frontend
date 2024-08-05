@@ -1,23 +1,21 @@
 <script setup>
 import { RouterView, useRoute } from "vue-router";
 import { computed } from "vue";
-import Navbar from "./components/Navbar.vue";
-import Footer from "./components/Footer.vue";
 
 const route = useRoute();
 
-const showNavbar = computed(() => route.path !== "/", "/signup");
-const showFooter = computed(() => route.path !== "/", "/signup");
+const defaultLayout = 'default';
+
+const layout = computed(() => `${route.meta.layout || defaultLayout}-layout`);
 </script>
 
 <template>
   <div id="app">
-    <Navbar v-if="showNavbar" />
-    <RouterView />
-    <Footer v-if="showFooter" />
+    <component :is="layout">
+      <RouterView />
+    </component>
   </div>
 </template>
 
 <style scoped>
-
 </style>
