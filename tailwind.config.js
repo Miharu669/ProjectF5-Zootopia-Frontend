@@ -3,6 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      variants: {
+         fill: ['hover', 'focus'],
+      },
+
       fontFamily: {
         caesar: ["Caesar Dressing", "Poppins"],
         poppins: ["Poppins", "sans-serif"],
