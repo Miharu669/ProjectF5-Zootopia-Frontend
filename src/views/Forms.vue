@@ -1,165 +1,112 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
 const user = ref({
-  username: '',
-  email: '',
-  password: '',
-  confirm: '',
-})
+  username: "",
+  email: "",
+  password: "",
+  confirm: "",
+});
 
 function register() {
-  const data = JSON.parse(JSON.stringify(user.value))
+  const data = JSON.parse(JSON.stringify(user.value));
   // eslint-disable-next-line no-console
-  console.log('Registered: ', data)
+  console.log("Registered: ", data);
 }
 </script>
 
 <template>
-    <div>
-      <h3 class="text-3xl font-semibold text-gray-700">
-        Forms
-      </h3>
-  
-      <div class="mt-4">
-        <h4 class="text-gray-600">
-          Model Form
-        </h4>
-  
-        <div class="mt-4">
-          <div
-            class="w-full max-w-sm overflow-hidden bg-white border rounded-md shadow-md"
-          >
-            <form>
-              <div
-                class="flex items-center justify-between px-5 py-3 text-gray-700 border-b"
+  <div class="mt-8 ">
+    <h3 class="text-3xl font-semibold text-marron-800 text-center">
+      Add a new animal
+    </h3>
+
+    <div class="mt-12 pb-5">
+      <div class="bg-white rounded-3xl shadow-md">
+        <div class="bg-random-50 p-4 rounded-t-3xl">
+          <h2 class="text-lg font-semibold text-white capitalize">
+            Animal details
+          </h2>
+        </div>
+        <form @submit.prevent="register">
+          <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 p-6">
+            <div>
+              <label class="text-random-50 font-semibold" for="name"
+                >Name *</label
               >
-                <h3 class="text-sm">
-                  Add Category
-                </h3>
-                <button>
-                  <svg
-                    class="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-              </div>
-  
-              <div class="px-5 py-6 text-gray-700 bg-gray-200 border-b">
-                <label class="text-xs">Name</label>
-  
-                <div class="relative mt-2 rounded-md shadow-sm">
-                  <span
-                    class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600"
-                  >
-                    <svg
-                      class="w-6 h-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
-                      />
-                    </svg>
-                  </span>
-  
-                  <input
-                    type="text"
-                    class="w-full px-12 py-2 border-transparent rounded-md appearance-none focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-                  >
-                </div>
-              </div>
-  
-              <div class="flex items-center justify-between px-5 py-3">
-                <button
-                  class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none"
-                >
-                  Cancel
-                </button>
-                <button
-                  class="px-3 py-1 text-sm text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none"
-                >
-                  Save
-                </button>
-              </div>
-            </form>
+              <!-- v-model="animal.name" -->
+              <input
+                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
+                type="text"
+                placeholder="Alex"
+              />
+            </div>
+
+            <div>
+              <label class="text-random-50 font-semibold" for="type"
+                >Type *</label
+              >
+              <!-- v-model="animal.type" -->
+              <input
+                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
+                type="text"
+                placeholder="Lion"
+              />
+            </div>
+
+            <div>
+              <label class="text-random-50 font-semibold" for="gender"
+                >Gender *</label
+              >
+              <!-- v-model="animal.gender" -->
+              <select
+                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
+                placeholder="Male"
+              >
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="male">Male</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white"value="female">Female</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-random-50 font-semibold" for="family"
+                >Family *</label
+              >
+              <!-- v-model="animal.family" -->
+              <input
+                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
+                type="text"
+                placeholder="Felids"
+              />
+            </div>
+
+            <div>
+              <label class="text-random-50 font-semibold" for="date"
+                >Date of entry *</label
+              >
+              <!-- v-model="animal.date" -->
+              <input
+                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
+                type="date"
+              />
+            </div>
           </div>
-        </div>
+        </form>
       </div>
-  
-      <div class="mt-8">
-        <h4 class="text-gray-600">
-          Forms
-        </h4>
-  
-        <div class="mt-4">
-          <div class="p-6 bg-white rounded-md shadow-md">
-            <h2 class="text-lg font-semibold text-gray-700 capitalize">
-              Account settings
-            </h2>
-  
-            <form @submit.prevent="register">
-              <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-                <div>
-                  <label class="text-gray-700" for="username">Username</label>
-                  <input
-                    v-model="user.username"
-                    class="w-full mt-2 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-                    type="text"
-                  >
-                </div>
-  
-                <div>
-                  <label class="text-gray-700" for="emailAddress">Email Address</label>
-                  <input
-                    v-model="user.email"
-                    class="w-full mt-2 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-                    type="email"
-                  >
-                </div>
-  
-                <div>
-                  <label class="text-gray-700" for="password">Password</label>
-                  <input
-                    v-model="user.password"
-                    class="w-full mt-2 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-                    type="password"
-                  >
-                </div>
-  
-                <div>
-                  <label class="text-gray-700" for="passwordConfirmation">Password Confirmation</label>
-                  <input
-                    v-model="user.confirm"
-                    class="w-full mt-2 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-                    type="password"
-                  >
-                </div>
-              </div>
-  
-              <div class="flex justify-end mt-4">
-                <button
-                  class="px-4 py-2 text-gray-200 bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-                >
-                  Save
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+
+      <div class="flex justify-end mt-4 space-x-4">
+        <button
+          class="px-4 py-2 text-random-50 bg-transparent border-2 border-random-50 rounded-full hover:bg-random-50 hover:outline-random-50 hover:text-white"
+        >
+          Cancel
+        </button>
+        <button
+          class="px-4 py-2 text-white bg-random-50 border-2 border-random-50 rounded-full hover:bg-transparent hover:outline-random-50 hover:text-random-50"
+        >
+          Submit
+        </button>
       </div>
     </div>
-  </template>
+  </div>
+</template>
+

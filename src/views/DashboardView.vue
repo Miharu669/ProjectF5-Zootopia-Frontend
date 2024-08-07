@@ -4,11 +4,10 @@ import Pagination from '../components/Pagination.vue';
 
 const testUser = {
   name: 'John Doe',
-  email: 'john@example.com',
   title: 'Software Engineer',
   title2: 'Web dev',
-  status: 'Active',
-  role: 'Owner',
+  family: 'monoparental',
+  gender: 'Non Binary',
   date: 'Ayer',
 }
 
