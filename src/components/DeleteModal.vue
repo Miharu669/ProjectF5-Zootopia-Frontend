@@ -7,7 +7,7 @@ const openDelete = ref(false);
 <template>
   <div>
     <button
-      class="px-6 py-3 mt-3 font-medium tracking-wide text-white focus:outline-none"
+      class="px-2 py-3 mt-3 font-medium tracking-wide text-white focus:outline-none"
       @click="openDelete = true"
     >
       <div class="bg-random-100 rounded-full p-3 inline-block">
