@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import Pagination from '../components/Pagination.vue';
 import DeleteModal from '../components/DeleteModal.vue';
+import ModifyModal from '../components/ModifyModal.vue';
 
 const testUser = {
   name: 'John Doe',
@@ -120,19 +121,11 @@ const users = ref([...Array(10).keys()].map(() => testUser))
                 </td>
 
                 <td
-                  class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900">
-                    <div class="bg-random-100 rounded-full p-3 inline-block">
-                      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M8.51787 2.73147L12.2684 6.48211L4.12433 14.6265L0.780474 14.9956C0.332829 15.0451 -0.0453838 14.6666 0.00441962 14.219L0.37648 10.8726L8.51787 2.73147ZM14.588 2.17306L12.827 0.411994C12.2777 -0.137331 11.3868 -0.137331 10.8375 0.411994L9.18084 2.06876L12.9313 5.81941L14.588 4.16264C15.1373 3.61302 15.1373 2.72238 14.588 2.17306Z"
-                          fill="black" />
-                      </svg>
-                    </div>
-                  </a>
+                  class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
+                  <ModifyModal/>
                 </td>
                 <td
-                  class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
+                  class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
                   
                  <DeleteModal/>
                 </td>
