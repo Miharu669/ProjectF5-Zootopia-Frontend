@@ -35,9 +35,10 @@ function register() {
                 >Name *</label
               >
               <!-- v-model="animal.name" -->
-              <input
+              <input 
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
                 type="text"
+                required
                 placeholder="Alex"
               />
             </div>
@@ -50,6 +51,7 @@ function register() {
               <input
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
                 type="text"
+                required
                 placeholder="Lion"
               />
             </div>
@@ -62,6 +64,7 @@ function register() {
               <select
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
                 placeholder="Male"
+                required
               >
                 <option class="text-random-50 hover:bg-random-50 hover:text-white" value="male">Male</option>
                 <option class="text-random-50 hover:bg-random-50 hover:text-white"value="female">Female</option>
@@ -76,6 +79,7 @@ function register() {
               <input
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
                 type="text"
+                required
                 placeholder="Felids"
               />
             </div>
@@ -88,6 +92,7 @@ function register() {
               <input
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
                 type="date"
+                required
               />
             </div>
           </div>

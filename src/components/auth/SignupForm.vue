@@ -36,6 +36,7 @@ import lionsImage from "./../../assets/img/lions.jpg";
                 >
                 <input
                   type="username"
+                  required
                   name="username"
                   id="username"
                   placeholder="Your Username"
@@ -50,6 +51,7 @@ import lionsImage from "./../../assets/img/lions.jpg";
                 </div>
                 <input
                   type="password"
+                  required
                   name="password"
                   id="password"
                   placeholder="Your Password"
