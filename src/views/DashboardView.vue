@@ -26,7 +26,7 @@ const users = ref([...Array(10).keys()].map(() => testUser))
       <div class="flex flex-wrap -mx-6">
         <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
           <div class="flex justify-between px-5 py-6 bg-white rounded-3xl shadow-sm">
-            <div class="mx-5">
+            <div class="mx-1">
               <h4 class="font-semibold text-gray-800">
                 Total species
               </h4>
@@ -122,12 +122,12 @@ const users = ref([...Array(10).keys()].map(() => testUser))
 
                 <td
                   class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
-                  <ModifyModal/>
+                  <ModifyModal />
                 </td>
                 <td
                   class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
-                  
-                 <DeleteModal/>
+
+                  <DeleteModal />
                 </td>
               </tr>
             </tbody>
