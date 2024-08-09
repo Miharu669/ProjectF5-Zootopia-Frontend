@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/guards/LoginView.vue";
 import Dashboard from "../views/DashboardView.vue";
 import Forms from "../views/Forms.vue"
+import RegisterForm from "../components/auth/RegisterForm.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,12 @@ const router = createRouter({
       path: '/',
       name: 'Login',
       component: Login,
+      meta: { layout: 'empty' },
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: RegisterForm,
       meta: { layout: 'empty' },
     },
     {
