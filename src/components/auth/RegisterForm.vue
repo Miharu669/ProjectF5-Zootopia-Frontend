@@ -1,32 +1,33 @@
 <script setup>
 import lionsImage from "./../../assets/img/lions.jpg";
 
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
     return {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
+      email: "",
     };
   },
   methods: {
-    async login() {
+    async register() {
       try {
-        const response = await axios.get(`${process.env.VUE_APP_API_ENDPOINT}/login`, {
-          auth: {
+        const response = await axios.post(
+          `${process.env.VUE_APP_API_ENDPOINT}/register`,
+          {
             username: this.username,
             password: this.password,
+            email: this.email,
           }
-        });
-        console.log('Login succesful:', response.data);
-        localStorage.setItem('username', response.data.username);
-        localStorage.setItem('roles', response.data.roles);
-       
-        this.$router.push('/dashboard');
+        );
+        console.log("Registro exitoso:", response.data);
+        alert("Usuario registrado exitosamente");
+        this.$router.push("/login");
       } catch (error) {
-        console.error('Error on login:', error.response.data.message);
-        alert('Try again.');
+        console.error("Error en el registro:", error.response.data);
+        alert("Hubo un error en el registro. Inténtalo de nuevo.");
       }
     },
   },
@@ -40,12 +41,14 @@ export default {
         class="hidden bg-cover lg:block lg:w-2/3"
         :style="{ backgroundImage: `url(${lionsImage})` }"
       >
-        <div class="flex items-center h-full px-20 ">
+        <div class="flex items-center h-full px-20">
           <div>
-            <h2 class="text-7xl font-caesar bg-ocre-950  text-ocre-50">
+            <h2 class="text-7xl font-caesar bg-ocre-950 text-ocre-50">
               ZOOTOPIA
             </h2>
-            <p class="text-center text-3xl font-caesar max-w-xl mt-3 text-ocre-50 bg-ocre-950">
+            <p
+              class="text-center text-3xl font-caesar max-w-xl mt-3 text-ocre-50 bg-ocre-950"
+            >
               NATURE RESERVE
             </p>
           </div>
@@ -57,12 +60,24 @@ export default {
             <h2 class="text-5xl font-poppins font-bold text-center text-white">
               Welcome to Zootopia
             </h2>
-            <p class="mt-3 text-white">Sign in to access your account</p>
+            <p class="mt-3 text-white">Sign up to create your account</p>
           </div>
           <div class="mt-8">
             <form>
               <div>
-                <label for="username" class="block mb-2 text-sm text-white"
+                <label for="email" class="block mb-2 text-sm text-white"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="example@example.com"
+                  class="block w-full px-4 py-2 mt-2 text-white placeholder-gris-300 bg-transparent border border-white rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
+                />
+              </div>
+              <div>
+                <label for="username" class="block mt-6 mb-2 text-sm text-white"
                   >Username</label
                 >
                 <input
@@ -93,11 +108,10 @@ export default {
                 <button
                   class="bg-verde-400 font-poppins w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform rounded-md hover:bg-random-50 focus:outline-none focus:bg-random-50 focus:ring focus:ring-random-50 focus:ring-opacity-50"
                 >
-                  Sign in
+                  Sign up
                 </button>
               </div>
             </form>
-            <p class="mt-6 text-sm text-center text-gray-400">Don&#x27;t have an account yet? <a href="/register" class="text-random-50 focus:outline-none focus:underline hover:underline">Sign up</a>.</p>
           </div>
         </div>
       </div>
