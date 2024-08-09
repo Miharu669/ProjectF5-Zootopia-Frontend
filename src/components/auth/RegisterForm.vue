@@ -1,36 +1,33 @@
 <script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import lionsImage from "./../../assets/img/lions.jpg";
-
 import axios from "axios";
 
-export default {
-  data() {
-    return {
-      username: "",
-      password: "",
-      email: "",
-    };
-  },
-  methods: {
-    async register() {
-      try {
-        const response = await axios.post(
-          `${process.env.VUE_APP_API_ENDPOINT}/register`,
-          {
-            username: this.username,
-            password: this.password,
-            email: this.email,
-          }
-        );
-        console.log("Registro exitoso:", response.data);
-        alert("Usuario registrado exitosamente");
-        this.$router.push("/login");
-      } catch (error) {
-        console.error("Error en el registro:", error.response.data);
-        alert("Hubo un error en el registro. Inténtalo de nuevo.");
+// Define reactive variables for form inputs
+const username = ref('');
+const password = ref('');
+const email = ref('');
+const router = useRouter();
+
+// Define the register function
+const register = async () => {
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_ENDPOINT}/register`,
+      {
+        username: username.value,
+        password: password.value,
+        email: email.value,
       }
-    },
-  },
+    );
+    console.log("Registro exitoso:", response.data);
+    alert("Usuario registrado exitosamente");
+    router.push("/login");
+  } catch (error) {
+    console.error("Error en el registro:", error.response?.data);
+    alert("Hubo un error en el registro. Inténtalo de nuevo.");
+  }
 };
 </script>
 
@@ -63,12 +60,13 @@ export default {
             <p class="mt-3 text-white">Sign up to create your account</p>
           </div>
           <div class="mt-8">
-            <form>
+            <form @submit.prevent="register">
               <div>
-                <label for="email" class="block mb-2 text-sm text-white"
-                  >Email Address</label
-                >
+                <label for="email" class="block mb-2 text-sm text-white">
+                  Email Address
+                </label>
                 <input
+                  v-model="email"
                   type="email"
                   name="email"
                   id="email"
@@ -77,11 +75,12 @@ export default {
                 />
               </div>
               <div>
-                <label for="username" class="block mt-6 mb-2 text-sm text-white"
-                  >Username</label
-                >
+                <label for="username" class="block mt-6 mb-2 text-sm text-white">
+                  Username
+                </label>
                 <input
-                  type="username"
+                  v-model="username"
+                  type="text"
                   required
                   name="username"
                   id="username"
@@ -91,11 +90,12 @@ export default {
               </div>
               <div class="mt-6">
                 <div class="flex justify-between mb-2">
-                  <label for="password" class="text-sm text-white"
-                    >Password</label
-                  >
+                  <label for="password" class="text-sm text-white">
+                    Password
+                  </label>
                 </div>
                 <input
+                  v-model="password"
                   type="password"
                   required
                   name="password"
@@ -106,6 +106,7 @@ export default {
               </div>
               <div class="mt-6">
                 <button
+                  type="submit"
                   class="bg-verde-400 font-poppins w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform rounded-md hover:bg-random-50 focus:outline-none focus:bg-random-50 focus:ring focus:ring-random-50 focus:ring-opacity-50"
                 >
                   Sign up

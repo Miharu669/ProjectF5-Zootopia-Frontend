@@ -1,35 +1,30 @@
 <script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import lionsImage from "./../../assets/img/lions.jpg";
-
 import axios from 'axios';
 
-export default {
-  data() {
-    return {
-      username: '',
-      password: '',
-    };
-  },
-  methods: {
-    async login() {
-      try {
-        const response = await axios.get(`${process.env.VUE_APP_API_ENDPOINT}/login`, {
-          auth: {
-            username: this.username,
-            password: this.password,
-          }
-        });
-        console.log('Login succesful:', response.data);
-        localStorage.setItem('username', response.data.username);
-        localStorage.setItem('roles', response.data.roles);
-       
-        this.$router.push('/dashboard');
-      } catch (error) {
-        console.error('Error on login:', error.response.data.message);
-        alert('Try again.');
+const username = ref('');
+const password = ref('');
+const router = useRouter();
+
+const login = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/login`, {
+      auth: {
+        username: username.value,
+        password: password.value,
       }
-    },
-  },
+    });
+    console.log('Login successful:', response.data);
+    localStorage.setItem('username', response.data.username);
+    localStorage.setItem('roles', response.data.roles);
+
+    router.push('/dashboard');
+  } catch (error) {
+    console.error('Error on login:', error.response.data.message);
+    alert('Try again.');
+  }
 };
 </script>
 
@@ -42,7 +37,7 @@ export default {
       >
         <div class="flex items-center h-full px-20 ">
           <div>
-            <h2 class="text-7xl font-caesar bg-ocre-950  text-ocre-50">
+            <h2 class="text-7xl font-caesar bg-ocre-950 text-ocre-50">
               ZOOTOPIA
             </h2>
             <p class="text-center text-3xl font-caesar max-w-xl mt-3 text-ocre-50 bg-ocre-950">
@@ -60,13 +55,12 @@ export default {
             <p class="mt-3 text-white">Sign in to access your account</p>
           </div>
           <div class="mt-8">
-            <form>
+            <form @submit.prevent="login">
               <div>
-                <label for="username" class="block mb-2 text-sm text-white"
-                  >Username</label
-                >
+                <label for="username" class="block mb-2 text-sm text-white">Username</label>
                 <input
-                  type="username"
+                  v-model="username"
+                  type="text"
                   required
                   name="username"
                   id="username"
@@ -76,11 +70,10 @@ export default {
               </div>
               <div class="mt-6">
                 <div class="flex justify-between mb-2">
-                  <label for="password" class="text-sm text-white"
-                    >Password</label
-                  >
+                  <label for="password" class="text-sm text-white">Password</label>
                 </div>
                 <input
+                  v-model="password"
                   type="password"
                   required
                   name="password"
@@ -91,13 +84,19 @@ export default {
               </div>
               <div class="mt-6">
                 <button
+                  type="submit"
                   class="bg-verde-400 font-poppins w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform rounded-md hover:bg-random-50 focus:outline-none focus:bg-random-50 focus:ring focus:ring-random-50 focus:ring-opacity-50"
                 >
                   Sign in
                 </button>
               </div>
             </form>
-            <p class="mt-6 text-sm text-center text-gray-400">Don&#x27;t have an account yet? <a href="/register" class="text-random-50 focus:outline-none focus:underline hover:underline">Sign up</a>.</p>
+            <p class="mt-6 text-sm text-center text-gray-400">
+              Don&#x27;t have an account yet?
+              <a href="/register" class="text-random-50 focus:outline-none focus:underline hover:underline">
+                Sign up
+              </a>.
+            </p>
           </div>
         </div>
       </div>
