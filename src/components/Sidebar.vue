@@ -15,10 +15,8 @@ const inactiveClass = ref(
 
 <template>
   <div class="flex">
-    <!-- Backdrop -->
     <div :class="isOpen ? 'block' : 'hidden'"
       class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden" @click="isOpen = false" />
-    <!-- End Backdrop -->
 
     <div :class="isOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
       class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-marron-800 lg:translate-x-0 lg:static lg:inset-0">
@@ -51,7 +49,7 @@ const inactiveClass = ref(
               fill="currentColor" />
           </svg>
 
-          <span class="mx-4">Forms</span>
+          <span class="mx-4">Add new</span>
         </router-link>
       </nav>
     </div>
