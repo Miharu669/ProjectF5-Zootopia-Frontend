@@ -1,7 +1,19 @@
 <script setup>
 import { ref } from "vue";
+import { useAnimalStore } from '../stores/animalStore.js';
+
+const props = defineProps({
+  animal: Object,
+});
 
 const openDelete = ref(false);
+const animalStore = useAnimalStore();
+
+const deleteAnimal = async () => {
+  await animalStore.deleteAnimal(props.animal.id);
+  openDelete.value = false;
+};
+
 </script>
 
 <template>
@@ -63,7 +75,7 @@ const openDelete = ref(false);
           <span class="text-sm">(Esc)</span>
         </div>
 
-        <!-- Add margin if you want to see some of the overlay behind the modal -->
+        
         <div class="px-6 py-4 text-left modal-content">
           <!-- Title -->
           <div class="flex items-center justify-between pb-3">
@@ -125,7 +137,7 @@ const openDelete = ref(false);
               </button>
               <button
                 class="px-4 py-2 text-white bg-random-50 border-2 border-random-50 rounded-full hover:bg-transparent hover:outline-random-50 hover:text-random-50"
-                @click="openDelete = false"
+                @click="deleteAnimal"
               >
                 Delete
               </button>
