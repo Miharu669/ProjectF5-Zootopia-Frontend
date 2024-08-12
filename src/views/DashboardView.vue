@@ -3,23 +3,13 @@ import { ref, onMounted } from 'vue'
 import Pagination from '../components/Pagination.vue';
 import DeleteModal from '../components/DeleteModal.vue';
 import ModifyModal from '../components/ModifyModal.vue';
-import { useAnimalStore } from '../stores/animalStore.js'
-
-// const testUser = {
-//   name: 'John Doe',
-//   title: 'Software Engineer',
-//   title2: 'Web dev',
-//   family: 'monoparental',
-//   gender: 'Non Binary',
-//   date: 'Ayer',
-// }
-
-// const users = ref([...Array(10).keys()].map(() => testUser))
+import { useAnimalStore } from '../stores/animalStore.js';
+import Filter from '../components/Filter.vue';
 
 const animalStore = useAnimalStore();
 
 onMounted(() => {
-  animalStore.fetchAnimals(); 
+  animalStore.fetchAnimals();
 });
 
 </script>
@@ -32,7 +22,7 @@ onMounted(() => {
 
     <div class="mt-4">
       <div class="flex flex-wrap -mx-6">
-        <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
+        <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3">
           <div class="flex justify-between px-5 py-6 bg-white rounded-3xl shadow-sm">
             <div class="mx-1">
               <h4 class="font-semibold text-gray-800">
@@ -44,6 +34,18 @@ onMounted(() => {
                 {{ animalStore.animals.length }}
               </p>
             </div>
+          </div>
+        </div>
+        <Filter />
+        <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 ">
+          <div class="px-5 py-6 bg-random-50 rounded-3xl shadow-sm">
+            <Router-link class="text-white font-semibold flex justify-center gap-5" to="/forms">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.34783 12.5764H0V7.33624H7.34783V0H12.5652V7.33624H20V12.5764H12.5652V20H7.34783V12.5764Z"
+                  fill="white" />
+              </svg>
+              Add new
+            </Router-link>
           </div>
         </div>
       </div>
@@ -124,7 +126,7 @@ onMounted(() => {
 
                 <td
                   class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
-                  <ModifyModal :animal="animal"/>
+                  <ModifyModal :animal="animal" />
                 </td>
                 <td
                   class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">

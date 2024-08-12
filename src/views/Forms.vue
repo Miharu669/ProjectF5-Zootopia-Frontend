@@ -10,7 +10,6 @@ const user = ref({
 
 function register() {
   const data = JSON.parse(JSON.stringify(user.value));
-  // eslint-disable-next-line no-console
   console.log("Registered: ", data);
 }
 </script>
@@ -31,69 +30,41 @@ function register() {
         <form @submit.prevent="register">
           <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 p-6">
             <div>
-              <label class="text-random-50 font-semibold" for="name"
-                >Name *</label
-              >
-              <!-- v-model="animal.name" -->
-              <input 
-                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
-                type="text"
-                required
-                placeholder="Alex"
-              />
-            </div>
-
-            <div>
-              <label class="text-random-50 font-semibold" for="type"
-                >Type *</label
-              >
-              <!-- v-model="animal.type" -->
+              <label class="text-random-50 font-semibold" for="name">Name *</label>
               <input
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
-                type="text"
-                required
-                placeholder="Lion"
-              />
+                type="text" required placeholder="Alex" />
             </div>
 
             <div>
-              <label class="text-random-50 font-semibold" for="gender"
-                >Gender *</label
-              >
-              <!-- v-model="animal.gender" -->
+              <label class="text-random-50 font-semibold" for="type">Type *</label>
+              <input
+                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
+                type="text" required placeholder="Lion" />
+            </div>
+
+            <div>
+              <label class="text-random-50 font-semibold" for="gender">Gender *</label>
               <select
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
-                placeholder="Male"
-                required
-              >
+                placeholder="Male" required>
                 <option class="text-random-50 hover:bg-random-50 hover:text-white" value="male">Male</option>
-                <option class="text-random-50 hover:bg-random-50 hover:text-white"value="female">Female</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="female">Female</option>
               </select>
             </div>
 
             <div>
-              <label class="text-random-50 font-semibold" for="family"
-                >Family *</label
-              >
-              <!-- v-model="animal.family" -->
+              <label class="text-random-50 font-semibold" for="family">Family *</label>
               <input
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
-                type="text"
-                required
-                placeholder="Felids"
-              />
+                type="text" required placeholder="Felids" />
             </div>
 
             <div>
-              <label class="text-random-50 font-semibold" for="date"
-                >Date of entry *</label
-              >
-              <!-- v-model="animal.date" -->
+              <label class="text-random-50 font-semibold" for="date">Date of entry *</label>
               <input
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
-                type="date"
-                required
-              />
+                type="date" required />
             </div>
           </div>
         </form>
@@ -101,17 +72,14 @@ function register() {
 
       <div class="flex justify-end mt-4 space-x-4">
         <button
-          class="px-4 py-2 text-random-50 bg-transparent border-2 border-random-50 rounded-full hover:bg-random-50 hover:outline-random-50 hover:text-white"
-        >
+          class="px-4 py-2 text-random-50 bg-transparent border-2 border-random-50 rounded-full hover:bg-random-50 hover:outline-random-50 hover:text-white">
           Cancel
         </button>
         <button
-          class="px-4 py-2 text-white bg-random-50 border-2 border-random-50 rounded-full hover:bg-transparent hover:outline-random-50 hover:text-random-50"
-        >
+          class="px-4 py-2 text-white bg-random-50 border-2 border-random-50 rounded-full hover:bg-transparent hover:outline-random-50 hover:text-random-50">
           Submit
         </button>
       </div>
     </div>
   </div>
 </template>
-
