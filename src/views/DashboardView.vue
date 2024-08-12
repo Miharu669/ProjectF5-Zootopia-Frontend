@@ -1,19 +1,27 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import Pagination from '../components/Pagination.vue';
 import DeleteModal from '../components/DeleteModal.vue';
 import ModifyModal from '../components/ModifyModal.vue';
+import { useAnimalStore } from '../stores/animalStore.js'
 
-const testUser = {
-  name: 'John Doe',
-  title: 'Software Engineer',
-  title2: 'Web dev',
-  family: 'monoparental',
-  gender: 'Non Binary',
-  date: 'Ayer',
-}
+// const testUser = {
+//   name: 'John Doe',
+//   title: 'Software Engineer',
+//   title2: 'Web dev',
+//   family: 'monoparental',
+//   gender: 'Non Binary',
+//   date: 'Ayer',
+// }
 
-const users = ref([...Array(10).keys()].map(() => testUser))
+// const users = ref([...Array(10).keys()].map(() => testUser))
+
+const animalStore = useAnimalStore();
+
+onMounted(() => {
+  animalStore.fetchAnimals(); 
+});
+
 </script>
 
 <template>
@@ -33,7 +41,7 @@ const users = ref([...Array(10).keys()].map(() => testUser))
             </div>
             <div class="mx-5  text-right">
               <p class="font-semibold text-random-50">
-                504
+                {{ animalStore.animals.length }}
               </p>
             </div>
           </div>
@@ -77,7 +85,7 @@ const users = ref([...Array(10).keys()].map(() => testUser))
             </thead>
 
             <tbody class="bg-white">
-              <tr v-for="(u, index) in users" :key="index">
+              <tr v-for="(animal, index) in animalStore.animals" :key="index">
                 <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
@@ -88,10 +96,7 @@ const users = ref([...Array(10).keys()].map(() => testUser))
 
                     <div class="ml-4">
                       <div class="text-sm font-medium leading-5 text-gray-900">
-                        {{ u.name }}
-                      </div>
-                      <div class="text-sm leading-5 text-gray-500">
-                        {{ u.email }}
+                        {{ animal.name }}
                       </div>
                     </div>
                   </div>
@@ -99,35 +104,32 @@ const users = ref([...Array(10).keys()].map(() => testUser))
 
                 <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                   <div class="text-sm leading-5 text-gray-900">
-                    {{ u.title }}
-                  </div>
-                  <div class="text-sm leading-5 text-gray-500">
-                    {{ u.title2 }}
+                    {{ animal.type.name }}
                   </div>
                 </td>
 
                 <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                  <span
-                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">{{
-                      u.status }}</span>
+                  <div class="text-sm leading-5 text-gray-900">
+                    {{ animal.type.family.name }}
+                  </div>
                 </td>
 
                 <td class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap">
-                  {{ u.role }}
+                  {{ animal.gender }}
                 </td>
 
                 <td class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap">
-                  {{ u.date }}
+                  {{ animal.dateOfEntry }}
                 </td>
 
                 <td
                   class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
-                  <ModifyModal />
+                  <ModifyModal :animal="animal"/>
                 </td>
                 <td
                   class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
 
-                  <DeleteModal />
+                  <DeleteModal :animal="animal" />
                 </td>
               </tr>
             </tbody>
