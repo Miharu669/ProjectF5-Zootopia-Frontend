@@ -1,7 +1,5 @@
-
 import { defineStore } from 'pinia';
 import axios from 'axios';
-
 
 const BASE_URL = 'http://localhost:8080/api/v1/animals';
 
@@ -64,11 +62,13 @@ export const useAnimalStore = defineStore('animal', {
     async addAnimal(newAnimal) {
       this.isLoading = true;
       try {
-        await api.post('/add', newAnimal);
+        const response = await api.post('/add', newAnimal);
         this.fetchAnimals(); 
+        return response.data;
       } catch (error) {
         this.error = 'Error adding animal: ' + error.message;
         console.error(this.error);
+        throw error;
       } finally {
         this.isLoading = false;
       }
@@ -80,8 +80,9 @@ export const useAnimalStore = defineStore('animal', {
         await api.put(`/update/${id}`, updatedAnimal);
         this.fetchAnimals(); 
       } catch (error) {
-        this.error = `Error updating animal with ID ${id}: ` + error.message;
+        this.error = 'Error updating animal: ' + error.message;
         console.error(this.error);
+        throw error;
       } finally {
         this.isLoading = false;
       }
@@ -93,12 +94,12 @@ export const useAnimalStore = defineStore('animal', {
         await api.delete(`/delete/${id}`);
         this.fetchAnimals(); 
       } catch (error) {
-        this.error = `Error deleting animal with ID ${id}: ` + error.message;
+        this.error = 'Error deleting animal: ' + error.message;
         console.error(this.error);
+        throw error;
       } finally {
         this.isLoading = false;
       }
     },
   },
 });
-

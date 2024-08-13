@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useAnimalStore } from '../stores/animalStore';
 
 const animalStore = useAnimalStore();
@@ -10,43 +10,46 @@ const gender = ref('');
 const family = ref('');
 const dateOfEntry = ref('');
 
-onMounted(async () => {
-  await animalStore.fetchTypes();
-  await animalStore.fetchFamilies();
-});
+const isSubmitting = ref(false);
+const errorMessage = ref('');
+const successMessage = ref('');
 
 const register = async () => {
+  isSubmitting.value = true;
+  errorMessage.value = '';
+  successMessage.value = '';
+
   const newAnimal = {
     name: name.value,
-    type: type.value,
+    typeName: type.value,
     gender: gender.value,
-    family: family.value,
-    dateOfEntry: dateOfEntry.value
+    dateOfEntry: dateOfEntry.value ? new Date(dateOfEntry.value).toISOString().split('T')[0] : null,
   };
 
   try {
     await animalStore.addAnimal(newAnimal);
-    // Limpiar el formulario después de agregar exitosamente
-    name.value = '';
-    type.value = '';
-    gender.value = '';
-    family.value = '';
-    dateOfEntry.value = '';
-    // Aquí puedes agregar un mensaje de éxito o alguna otra acción
-    console.log('Animal añadido con éxito');
+    clearForm();
+    successMessage.value = 'Animal añadido con éxito';
   } catch (error) {
     console.error('Error al registrar el animal:', error);
-    // Aquí puedes manejar el error, como mostrar un mensaje al usuario
+    errorMessage.value = 'Hubo un error al añadir el animal. Por favor, intenta de nuevo más tarde.';
+  } finally {
+    isSubmitting.value = false;
   }
 };
 
-const cancel = () => {
-  // Limpiar el formulario
+const clearForm = () => {
   name.value = '';
   type.value = '';
   gender.value = '';
   family.value = '';
   dateOfEntry.value = '';
+};
+
+const cancel = () => {
+  clearForm();
+  errorMessage.value = '';
+  successMessage.value = '';
 };
 </script>
 
@@ -56,15 +59,17 @@ const cancel = () => {
       Add a new animal
     </h3>
 
-    <div v-if="animalStore.isLoading" class="text-center mt-4">
-      Loading...
+    <div v-if="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
+      <strong class="font-bold">Error!</strong>
+      <span class="block sm:inline">{{ errorMessage }}</span>
     </div>
 
-    <div v-if="animalStore.error" class="text-red-500 text-center mt-4">
-      {{ animalStore.error }}
+    <div v-if="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-4" role="alert">
+      <strong class="font-bold">Success!</strong>
+      <span class="block sm:inline">{{ successMessage }}</span>
     </div>
 
-    <div class="mt-12 pb-5" v-if="!animalStore.isLoading">
+    <div class="mt-12 pb-5">
       <div class="bg-white rounded-3xl shadow-md">
         <div class="bg-random-50 p-4 rounded-t-3xl">
           <h2 class="text-lg font-semibold text-white capitalize">
@@ -92,12 +97,18 @@ const cancel = () => {
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
                 required>
                 <option value="" disabled selected>Select a type</option>
-                <option v-for="animalType in animalStore.types" :key="animalType" :value="animalType">
-                  {{ animalType }}
-                </option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Lion">Lion</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Tiger">Tiger</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Wolf">Wolf</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Fox">Fox</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Crocodile">Crocodile</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Snake">Snake</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Otter">Otter</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Weasel">Weasel</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Rabbit">Rabbit</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Hare">Hare</option>
               </select>
             </div>
-
             <div>
               <label class="text-random-50 font-semibold" for="gender">Gender *</label>
               <select
@@ -106,8 +117,8 @@ const cancel = () => {
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
                 required>
                 <option value="" disabled selected>Select a gender</option>
-                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="male">Male</option>
-                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
               </select>
             </div>
 
@@ -119,9 +130,11 @@ const cancel = () => {
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
                 required>
                 <option value="" disabled selected>Select a family</option>
-                <option v-for="animalFamily in animalStore.families" :key="animalFamily" :value="animalFamily">
-                  {{ animalFamily }}
-                </option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Felidae">Felidae</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Canidae">Canidae</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Reptilia">Reptilia</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Mustelidae">Mustelidae</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Lion">Leporidae</option>
               </select>
             </div>
 
@@ -140,13 +153,15 @@ const cancel = () => {
             <button
               type="button"
               @click="cancel"
-              class="px-4 py-2 text-random-50 bg-transparent border-2 border-random-50 rounded-full hover:bg-random-50 hover:outline-random-50 hover:text-white">
+              :disabled="isSubmitting"
+              class="px-4 py-2 text-random-50 bg-transparent border-2 border-random-50 rounded-full hover:bg-random-50 hover:outline-random-50 hover:text-white disabled:opacity-50">
               Cancel
             </button>
             <button
               type="submit"
-              class="px-4 py-2 text-white bg-random-50 border-2 border-random-50 rounded-full hover:bg-transparent hover:outline-random-50 hover:text-random-50">
-              Submit
+              :disabled="isSubmitting"
+              class="px-4 py-2 text-white bg-random-50 border border-random-50 rounded-full hover:bg-random-200 disabled:opacity-50">
+              {{ isSubmitting ? 'Submitting...' : 'Add Animal' }}
             </button>
           </div>
         </form>
@@ -154,3 +169,4 @@ const cancel = () => {
     </div>
   </div>
 </template>
+

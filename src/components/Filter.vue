@@ -35,7 +35,7 @@
                             <label for="Calidae" class="inline-flex items-center gap-2">
                                 <input type="checkbox" id="Calidae" class="size-5 rounded accent-marron-800" />
 
-                                <span class="text-sm font-medium text-gray-500"> Calidae </span>
+                                <span class="text-sm font-medium text-gray-500"> Canidae </span>
                             </label>
                         </li>
 
