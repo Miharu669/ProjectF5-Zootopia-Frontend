@@ -1,48 +1,3 @@
-<script setup>
-import { ref, computed, onMounted } from 'vue';
-import Pagination from '../components/Pagination.vue';
-import DeleteModal from '../components/DeleteModal.vue';
-import ModifyModal from '../components/ModifyModal.vue';
-import { useAnimalStore } from '../stores/animalStore.js';
-import Filter from '../components/Filter.vue';
-
-const animalStore = useAnimalStore();
-const selectedAnimal = ref(null);
-const showModal = ref(false);
-const currentPage = ref(1);
-const itemsPerPage = 10;
-
-const openEditModal = (animal) => {
-  selectedAnimal.value = animal;
-  showModal.value = true;
-};
-
-const closeModal = () => {
-  showModal.value = false;
-  selectedAnimal.value = null;
-};
-
-const handleAnimalUpdate = (updatedAnimal) => {
-  animalStore.fetchAnimals();
-};
-
-const totalPages = computed(() => Math.ceil(animalStore.animals.length / itemsPerPage));
-
-const animalsToShow = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  return animalStore.animals.slice(start, end);
-});
-
-function handlePageChange(page) {
-  currentPage.value = page;
-}
-
-onMounted(() => {
-  animalStore.fetchAnimals();
-});
-</script>
-
 <template>
   <div>
     <h3 class="text-3xl font-semibold text-marron-800">List of species</h3>
@@ -115,7 +70,7 @@ onMounted(() => {
                   {{ animal.dateOfEntry }}
                 </td>
                 <td class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
-                  <ModifyModal v-if="showModal && selectedAnimal" :animal="selectedAnimal" @update:animal="handleAnimalUpdate" @close="closeModal" />
+                  <button @click="openEditModal(animal)" class="text-blue-500 hover:text-blue-700">Edit</button>
                 </td>
                 <td class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
                   <DeleteModal :animal="animal" />
@@ -127,5 +82,58 @@ onMounted(() => {
         </div>
       </div>
     </div>
+
+    <ModifyModal
+      v-if="showModal"
+      :isVisible="showModal"
+      :animal="selectedAnimal"
+      @update:animal="handleAnimalUpdate"
+      @close="closeModal"
+    />
   </div>
 </template>
+
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import Pagination from '../components/Pagination.vue';
+import DeleteModal from '../components/DeleteModal.vue';
+import ModifyModal from '../components/ModifyModal.vue';
+import Filter from '../components/Filter.vue';
+import { useAnimalStore } from '../stores/animalStore.js';
+
+const animalStore = useAnimalStore();
+const selectedAnimal = ref(null);
+const showModal = ref(false);
+const currentPage = ref(1);
+const itemsPerPage = 10;
+
+const openEditModal = (animal) => {
+  selectedAnimal.value = animal;
+  showModal.value = true;
+};
+
+const closeModal = () => {
+  showModal.value = false;
+  selectedAnimal.value = null;
+};
+
+const handleAnimalUpdate = () => {
+  animalStore.fetchAnimals();
+};
+
+const totalPages = computed(() => Math.ceil(animalStore.animals.length / itemsPerPage));
+
+const animalsToShow = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  return animalStore.animals.slice(start, end);
+});
+
+function handlePageChange(page) {
+  currentPage.value = page;
+}
+
+onMounted(() => {
+  animalStore.fetchAnimals();
+});
+</script>
