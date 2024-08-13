@@ -2,40 +2,42 @@
   <div class="grid min-h-[60px] w-full place-items-end p-6 lg:overflow-visible bg-white">
     <nav>
       <ul class="flex">
+        <!-- Botón de página anterior -->
         <li>
           <a
             class="mx-1 flex h-9 w-9 items-center justify-center rounded-full bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
             href="#"
+            @click.prevent="goToPage(currentPage - 1)"
+            :aria-disabled="currentPage === 1 ? 'true' : 'false'"
             aria-label="Previous"
           >
             <span class="material-icons text-sm">keyboard_arrow_left</span>
           </a>
         </li>
-        <li>
+
+        <!-- Botones de páginas -->
+        <li v-for="page in pages" :key="page">
           <a
-            class="mx-1 flex h-9 w-9 items-center justify-center rounded-full bg-random-50 p-0 text-sm text-white shadow-md transition duration-150 ease-in-out"
+            :class="[
+              'mx-1 flex h-9 w-9 items-center justify-center rounded-full p-0 text-sm transition duration-150 ease-in-out',
+              page === currentPage
+                ? 'bg-random-50 text-white shadow-md'
+                : 'border border-random-50 bg-transparent text-blue-gray-500 hover:bg-light-300'
+            ]"
             href="#"
-            >1</a
+            @click.prevent="goToPage(page)"
           >
+            {{ page }}
+          </a>
         </li>
-        <li>
-          <a
-            class="mx-1 flex h-9 w-9 items-center justify-center rounded-full border border-random-50 bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
-            href="#"
-            >2</a
-          >
-        </li>
-        <li>
-          <a
-            class="mx-1 flex h-9 w-9 items-center justify-center rounded-full border border-random-50 bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
-            href="#"
-            >3</a
-          >
-        </li>
+
+        <!-- Botón de página siguiente -->
         <li>
           <a
             class="mx-1 flex h-9 w-9 items-center justify-center rounded-full bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
             href="#"
+            @click.prevent="goToPage(currentPage + 1)"
+            :aria-disabled="currentPage === totalPages ? 'true' : 'false'"
             aria-label="Next"
           >
             <span class="material-icons text-sm">keyboard_arrow_right</span>
@@ -47,27 +49,31 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { computed, defineEmits, defineProps } from 'vue';
 
-// Si necesitas agregar alguna lógica, puedes utilizar los composables de Vue aquí.
-// Por ejemplo:
-const currentPage = ref(1)
-const totalPages = 3
+const props = defineProps({
+  currentPage: Number,
+  totalPages: Number,
+});
+
+const emit = defineEmits(['page-changed']);
+
+const pages = computed(() => {
+  const pagesArray = [];
+  for (let i = 1; i <= props.totalPages; i++) {
+    pagesArray.push(i);
+  }
+  return pagesArray;
+});
 
 function goToPage(page) {
-  if (page > 0 && page <= totalPages) {
-    currentPage.value = page
+  if (page >= 1 && page <= props.totalPages && page !== props.currentPage) {
+    emit('page-changed', page);
   }
 }
-
-// Puedes usar onMounted para realizar acciones cuando el componente se monte.
-onMounted(() => {
-  console.log('Componente montado')
-})
 </script>
 
 <style scoped>
-/* Asegúrate de incluir los estilos de Material Icons */
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
