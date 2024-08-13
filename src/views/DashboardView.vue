@@ -7,24 +7,10 @@ import { useAnimalStore } from '../stores/animalStore.js';
 import Filter from '../components/Filter.vue';
 
 const animalStore = useAnimalStore();
-const selectedAnimal = ref(null);
-const showModal = ref(false);
 const currentPage = ref(1);
 const itemsPerPage = 10;
 
-const openEditModal = (animal) => {
-  selectedAnimal.value = animal;
-  showModal.value = true;
-};
-
-const closeModal = () => {
-  showModal.value = false;
-  selectedAnimal.value = null;
-};
-
-const handleAnimalUpdate = (updatedAnimal) => {
-  animalStore.fetchAnimals();
-};
+const animals = animalStore.animals;
 
 const totalPages = computed(() => Math.ceil(animalStore.animals.length / itemsPerPage));
 
@@ -115,7 +101,7 @@ onMounted(() => {
                   {{ animal.dateOfEntry }}
                 </td>
                 <td class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
-                  <ModifyModal v-if="showModal && selectedAnimal" :animal="selectedAnimal" @update:animal="handleAnimalUpdate" @close="closeModal" />
+                  <ModifyModal :animal="animal" />
                 </td>
                 <td class="px-2 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
                   <DeleteModal :animal="animal" />
