@@ -1,7 +1,23 @@
 <script setup>
 import { ref } from "vue";
+import { useAnimalStore } from "../stores/animalStore";
 
 const openModify = ref(false);
+const selectedAnimal = ref(null);
+
+const animalStore = useAnimalStore();
+
+const openEditModal = (animal) => {
+  selectedAnimal.value = { ...animal };  
+  openModify.value = true;
+};
+
+const updateAnimal = async () => {
+  if (selectedAnimal.value && selectedAnimal.value.id) {
+    await animalStore.updateAnimal(selectedAnimal.value.id, selectedAnimal.value);
+    openModify.value = false; 
+  }
+};
 </script>
 
 <template>
@@ -46,7 +62,7 @@ const openModify = ref(false);
           </div>
 
           <!-- Body -->
-          <form @submit.prevent="register">
+          <form @submit.prevent="updateAnimal">
           <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 p-6">
             <div>
               <label class="text-random-50 font-semibold" for="name"
@@ -126,7 +142,7 @@ const openModify = ref(false);
               </button>
               <button
                 class="px-4 py-2 text-white bg-random-50 border-2 border-random-50 rounded-full hover:bg-transparent hover:outline-random-50 hover:text-random-50"
-                @click="openModify = false">
+                >
                 Save
               </button>
             </div>
