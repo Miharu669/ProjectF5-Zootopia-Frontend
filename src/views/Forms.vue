@@ -91,15 +91,24 @@ const cancel = () => {
 
             <div>
               <label class="text-random-50 font-semibold" for="type">Type *</label>
-              <input
+              <select
                 v-model="type"
                 id="type"
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
-                type="text" 
-                required 
-                placeholder="Lion" />
+                required>
+                <option value="" disabled selected>Select a type</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Lion">Lion</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Tiger">Tiger</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Wolf">Wolf</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Fox">Fox</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Crocodile">Crocodile</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Snake">Snake</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Otter">Otter</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Weasel">Weasel</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Rabbit">Rabbit</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Hare">Hare</option>
+              </select>
             </div>
-
             <div>
               <label class="text-random-50 font-semibold" for="gender">Gender *</label>
               <select
@@ -115,13 +124,18 @@ const cancel = () => {
 
             <div>
               <label class="text-random-50 font-semibold" for="family">Family *</label>
-              <input
+              <select
                 v-model="family"
                 id="family"
                 class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40"
-                type="text" 
-                required 
-                placeholder="Felids" />
+                required>
+                <option value="" disabled selected>Select a family</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Felidae">Felidae</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Canidae">Canidae</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Reptilia">Reptilia</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Mustelidae">Mustelidae</option>
+                <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Lion">Leporidae</option>
+              </select>
             </div>
 
             <div>
