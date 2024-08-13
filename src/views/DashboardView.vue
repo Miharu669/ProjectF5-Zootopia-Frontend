@@ -207,13 +207,13 @@ const handleAnimalUpdate = () => {
 };
 
 const totalPages = computed(() =>
-  Math.ceil(animalStore.animals.length / itemsPerPage)
+  Math.ceil(animalStore.filteredAnimals.length / itemsPerPage)
 );
 
 const animalsToShow = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
   const end = start + itemsPerPage;
-  return animalStore.animals.slice(start, end);
+  return animalStore.filteredAnimals.slice(start, end);
 });
 
 function handlePageChange(page) {
@@ -221,6 +221,10 @@ function handlePageChange(page) {
 }
 
 onMounted(() => {
-  animalStore.fetchAnimals();
+  animalStore.fetchAnimals().then(() => {
+    if (animalStore.selectedFilters.length > 0) {
+      animalStore.applyFilters(animalStore.selectedFilters);
+    }
+  });
 });
 </script>
