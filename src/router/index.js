@@ -7,30 +7,19 @@ import RegisterForm from "../components/auth/RegisterForm.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // {
-    //   path: "/",
-    //   name: "Login",
-    //   component: LoginView,
-    //   meta: { title: "Zootopia" },
-    // },
-    // {
-    //   path: "/home",
-    //   name: "Dashboard",
-    //   component: DashboardView,
-    //   meta: { title: "Zootopia" },
-    // },
+  
     {
       path: '/',
       name: 'Login',
       component: Login,
       meta: { layout: 'empty' },
     },
-    {
-      path: '/register',
-      name: 'Register',
-      component: RegisterForm,
-      meta: { layout: 'empty' },
-    },
+    // {
+    //   path: '/register',
+    //   name: 'Register',
+    //   component: RegisterForm,
+    //   meta: { layout: 'empty' },
+    // },
     {
       path: '/dashboard',
       name: 'Dashboard',

@@ -6,20 +6,20 @@ const animalStore = useAnimalStore();
 const families = ref([]);
 const selectedFilters = ref([]);
 
-// Función para aplicar los filtros seleccionados
+
 const applyFilters = () => {
   animalStore.applyFilters(selectedFilters.value);
 };
 
-// Función para resetear los filtros
+
 const resetFilters = () => {
   selectedFilters.value = [];
-  applyFilters();  // Aplicar filtro vacío para resetear la lista
+  applyFilters();  
 };
 
 onMounted(async () => {
   await animalStore.fetchFamilies();
-  families.value = animalStore.families;  // Asignamos las familias al array de checkboxes
+  families.value = animalStore.families;  
 });
 </script>
 

@@ -1,38 +1,36 @@
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import lionsImage from "./../../assets/img/lions.jpg";
-import axios from "axios";
+// import { ref } from 'vue';
+// import { useRouter } from 'vue-router';
+// import lionsImage from "./../../assets/img/lions.jpg";
+// import axios from "axios";
 
-// Define reactive variables for form inputs
-const username = ref('');
-const password = ref('');
-const email = ref('');
-const router = useRouter();
+// const username = ref('');
+// const password = ref('');
+// const email = ref('');
+// const router = useRouter();
 
-// Define the register function
-const register = async () => {
-  try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_ENDPOINT}/register`,
-      {
-        username: username.value,
-        password: password.value,
-        email: email.value,
-      }
-    );
-    console.log("Registro exitoso:", response.data);
-    alert("Usuario registrado exitosamente");
-    router.push("/login");
-  } catch (error) {
-    console.error("Error en el registro:", error.response?.data);
-    alert("Hubo un error en el registro. Inténtalo de nuevo.");
-  }
-};
+// const register = async () => {
+//   try {
+//     const response = await axios.post(
+//       `${import.meta.env.VITE_API_ENDPOINT}/register`,
+//       {
+//         username: username.value,
+//         password: password.value,
+//         email: email.value,
+//       }
+//     );
+//     console.log("Registro exitoso:", response.data);
+//     alert("Usuario registrado exitosamente");
+//     router.push("/login");
+//   } catch (error) {
+//     console.error("Error en el registro:", error.response?.data);
+//     alert("Hubo un error en el registro. Inténtalo de nuevo.");
+//   }
+// };
 </script>
 
 <template>
-  <div class="bg-marron-800">
+  <!-- <div class="bg-marron-800">
     <div class="flex justify-center h-screen">
       <div
         class="hidden bg-cover lg:block lg:w-2/3"
@@ -117,5 +115,5 @@ const register = async () => {
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
