@@ -155,7 +155,7 @@ onMounted(() => {
         <div class="flex justify-end mt-4 space-x-4">
           <button type="button" @click="closeModal" class="px-4 py-2 text-random-50 bg-transparent border-2 border-random-50 rounded-full hover:bg-random-50 hover:outline-random-50 hover:text-white">Cancel</button>
           <button type="submit" :disabled="isSubmitting" class="px-4 py-2 text-white bg-random-50 border-2 border-random-50 rounded-full hover:bg-transparent hover:outline-random-50 hover:text-random-50">
-            {{ isEditMode ? 'Update' : 'Save' }}
+            {{ isEditMode ? 'Save' : 'Save' }}
           </button>
         </div>
       </form>
