@@ -30,6 +30,7 @@ const router = createRouter({
       path: '/forms',
       name: 'Forms',
       component: Forms,
+      meta: { requiresAuth: true, role: 'ROLE_ADMIN' },
     },
     // {
     //   path: '/cards',
