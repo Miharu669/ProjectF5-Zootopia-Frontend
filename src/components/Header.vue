@@ -75,11 +75,12 @@ const { isOpen } = useSidebar()
           class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none"
           @click="dropdownOpen = !dropdownOpen"
         >
-          <img
+          <!-- <img
             class="object-cover w-full h-full"
             src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=296&q=80"
             alt="Your avatar"
-          >
+          > -->
+          <img class="object-cover w-full h-full" src="../assets/img/mauricio.jpeg" alt="Your avatar">
         </button>
 
         <div
@@ -102,7 +103,7 @@ const { isOpen } = useSidebar()
           >
             <router-link
               to="/"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-random-50 hover:text-white"
             >
               Log out
             </router-link>
