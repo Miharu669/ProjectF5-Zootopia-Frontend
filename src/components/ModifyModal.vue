@@ -84,7 +84,7 @@ onMounted(() => {
     <div class="bg-white rounded-lg shadow-lg w-full max-w-lg">
       <!-- Header -->
       <div class="flex justify-between items-center p-4 border-b">
-        <h2 class="text-2xl font-bold">{{ isEditMode ? 'Edit Animal' : 'Add Animal' }}</h2>
+        <h2 class="text-2xl font-bold text-gris-950">{{ isEditMode ? 'Edit Animal' : 'Add Animal' }}</h2>
         <button @click="closeModal" class="text-gray-600 hover:text-gray-900">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -105,7 +105,6 @@ onMounted(() => {
           <div>
             <label for="type" class="text-random-50 font-semibold">Type *</label>
             <select v-model="animal.typeName" id="type" required class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-random-50 rounded-md focus:ring-random-50 focus:outline-random-50 focus:ring focus:ring-opacity-40">
-              <option value="" disabled>Select a type</option>
               <option v-for="type in types" :key="type" :value="type">{{ type }}</option>
               <option value="" disabled selected>Select a type</option>
                 <option class="text-random-50 hover:bg-random-50 hover:text-white" value="Lion">Lion</option>

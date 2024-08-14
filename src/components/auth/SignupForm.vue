@@ -10,7 +10,7 @@ const router = useRouter();
 
 const login = async () => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/login`, {
+    const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/login`, {}, {
       auth: {
         username: username.value,
         password: password.value,
@@ -18,12 +18,13 @@ const login = async () => {
     });
     console.log('Login successful:', response.data);
     localStorage.setItem('username', response.data.username);
-    localStorage.setItem('roles', response.data.roles);
+    localStorage.setItem('roles', JSON.stringify(response.data.roles));
 
     router.push('/dashboard');
   } catch (error) {
-    console.error('Error on login:', error.response.data.message);
-    alert('Try again.');
+    const errorMessage = error.response?.data?.message || 'Invalid user. Please try again.';
+    console.error('Error on login:', errorMessage);
+    alert(errorMessage);
   }
 };
 </script>
