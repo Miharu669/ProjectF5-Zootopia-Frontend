@@ -1,9 +1,24 @@
 <script setup>
-import { ref } from 'vue'
+import { ref} from 'vue'
 import { useSidebar } from '../composables/useSidebar'
+import { useRouter } from 'vue-router'
 
 const dropdownOpen = ref(false)
 const { isOpen } = useSidebar()
+
+const router = useRouter()
+
+const toggleDropdown = () => {
+  dropdownOpen.value = !dropdownOpen.value
+}
+
+const logout = () => {
+  
+  localStorage.removeItem('username')
+  localStorage.removeItem('roles')
+  
+  router.push('/')
+}
 </script>
 
 <template>
@@ -100,12 +115,12 @@ const { isOpen } = useSidebar()
             v-show="dropdownOpen"
             class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl"
           >
-            <router-link
-              to="/"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+          <button
+              @click="logout"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white w-full text-left"
             >
               Log out
-            </router-link>
+            </button>
           </div>
         </transition>
       </div>

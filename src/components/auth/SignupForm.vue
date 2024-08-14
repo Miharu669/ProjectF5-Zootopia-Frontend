@@ -22,7 +22,7 @@ const login = async () => {
 
     router.push('/dashboard');
   } catch (error) {
-    const errorMessage = error.response?.data?.message || 'You shall not pass.';
+    const errorMessage = error.response?.data?.message || 'You should not pass.';
     console.error('Error on login:', errorMessage);
     alert(errorMessage);
   }
@@ -92,7 +92,12 @@ const login = async () => {
                 </button>
               </div>
             </form>
-           
+            <p class="mt-6 text-sm text-center text-gray-400">
+              Don&#x27;t have an account yet?
+              <a href="/register" class="text-random-50 focus:outline-none focus:underline hover:underline">
+                Sign up
+              </a>.
+            </p>
           </div>
         </div>
       </div>
