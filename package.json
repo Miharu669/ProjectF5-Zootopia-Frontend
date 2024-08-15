@@ -15,7 +15,11 @@
     "test-cover": "vitest run --coverage"
   },
   "dependencies": {
+<<<<<<< HEAD
     "axios": ">=1.7.4",
+=======
+    "axios": "^1.7.4",
+>>>>>>> 342c89319ab8e4607af8d7b2bab10eb6be873ba9
     "pinia": "^2.2.0",
     "vue": "^3.4.31",
     "vue-router": "^4.4.0",
