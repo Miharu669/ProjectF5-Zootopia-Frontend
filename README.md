@@ -1,10 +1,18 @@
-# Frontend: Vue 3 Application
+# Zootopia
 
-### Overview
+## Overview
+Software para la gestión y mantenimiento de una reserva de animales.
 
-The frontend is built using Vue 3 with the Composition API, JavaScript, and Tailwind CSS.
+## Tools
 
-### Features
+- Vue 3 with the Composition API
+- Pinia
+- Router
+- Axios
+- JavaScript
+- Tailwind CSS
+
+## Features
 
 - **Admin Login**: Secure access with feedback for incorrect attempts.
 - **Dashboard**: Displays total number of species in the reserve.
@@ -14,30 +22,36 @@ The frontend is built using Vue 3 with the Composition API, JavaScript, and Tail
   - Delete animals
 - **Animal List View**: Paginated list with filtering options.
 
-### Technologies Used
 
-- Vue 3 Composition API
-- JavaScript
-- Tailwind CSS
+## Project Setup
 
-### Project Setup
-
-```bash
-# Install dependencies
+```sh
 npm install
+```
 
-# Run development server
-npm run serve
+### Compile and Hot-Reload for Development
 
-# Build for production
+```sh
+npm run dev
+```
+
+### Compile and Minify for Production
+
+```sh
 npm run build
 ```
-Directory Structure
-```bash
-src/
-├── components/
-├── views/
-├── store/
-├── assets/
-├── App.vue
-└── main.js
+
+### Run Unit Tests with [Vitest](https://vitest.dev/)
+
+```sh
+npm run test:unit
+```
+
+ ## Design
+
+![zootopia login](https://github.com/user-attachments/assets/182934aa-9c86-4ede-999c-cf56c66e99e7)
+
+![zootopia dashboard](https://github.com/user-attachments/assets/b72a3260-9dc3-49e3-a5fb-4ac74f3320eb)
+
+![zootopia add new](https://github.com/user-attachments/assets/ed124b02-cabe-422f-85d9-db33761f29ab)
+
